@@ -1,0 +1,8 @@
+#!/usr/local/bin/execlineb -P
+fdmove -c 2 1
+foreground { 
+	if -nt { s6-test -d /run/lvm } 
+	s6-mkdir /run/lvm
+}
+exec -c
+lvmetad -f -p /run/lvm/lvmetad.pid
